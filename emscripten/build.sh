@@ -7,7 +7,7 @@
 
 set -ex
 
-version=1.36.4
+version=1.37.22
 
 ##
 
@@ -56,10 +56,10 @@ chmod +w ${tmpdir}/src
 mkdir ${tmpdir}/src/build
 pushd ${tmpdir}/src/build
 
-../configure --enable-optimized --disable-assertions --enable-targets=host,js
+cmake .. -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86;JSBackend" -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF
 make
 
-cp -a Release/bin ${bundledir}/emscripten-fastcomp
+cp -a bin ${bundledir}/emscripten-fastcomp
 popd
 
 # Finish up:
